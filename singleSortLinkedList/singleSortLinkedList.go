@@ -4,7 +4,10 @@ package singleSortLinkedList
 	单向有序链表demo
 */
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 //数据节点
 type node struct {
@@ -77,9 +80,9 @@ func (l *headNode) list() []int {
 	vals := make([]int, 0)
 
 	//空链表
-	if l.NodeCount == 0 {
-		return vals
-	}
+	//if l.NodeCount == 0 {
+	//	return vals
+	//}
 
 	temp := l.Next
 
@@ -159,4 +162,101 @@ func SingleSortLinkedListTest() {
 	fmt.Println("链表node = ", l.list())
 	l.removeNode(dataList[5])
 	fmt.Println("链表node = ", l.list())
+}
+
+// InterviewQuestions 面试题
+func InterviewQuestions() {
+	//求单链表中节点个数
+	dataList := []int{1, 3, 5, 2, 4, 6} //待操作的数据
+
+	l := initLinkedList()
+
+	for _, v := range dataList {
+		l.addNode(v)
+	}
+	fmt.Println("链表 = ", l.list())
+	fmt.Println("链表节点个数 = ", l.getNodeCount())
+
+	//查找倒数第k个节点
+	index := 2
+	val := l.getNodeByIndex(index)
+	fmt.Println("倒数第"+strconv.Itoa(index)+"个节点 = ", val)
+
+	//单链表的反转
+	fmt.Println("反转后的链表 = ", l.reverse().list())
+}
+
+func (l *headNode) getNodeCount() int {
+	var count int
+
+	temp := l.Next
+
+	for {
+		if temp == nil {
+			return count
+		}
+
+		count++
+
+		temp = temp.NextNode
+	}
+}
+
+/*
+	若某个节点后面第k-1个节点是尾节点，则其为答案
+*/
+func (l *headNode) getNodeByIndex(k int) int {
+	tempTarget := l.Next
+
+	for {
+		tempTail := tempTarget
+
+		for i := 0; i < k-1; i++ {
+			tempTail = tempTail.NextNode
+		}
+
+		if tempTail.NextNode == nil {
+			return tempTarget.Val
+		}
+
+		tempTarget = tempTarget.NextNode
+	}
+}
+
+func (l *headNode) reverse() *headNode {
+	//依次取出链表中的数据
+	vals := make([]int, 0)
+
+	temp := l.Next
+	for {
+		if temp == nil {
+			break
+		}
+		vals = append(vals, temp.Val)
+
+		temp = temp.NextNode
+	}
+	//fmt.Println("vals = ", vals)
+
+	//反向插入新的链表
+	ll := initLinkedList()
+	temp = ll.Next
+	for i := len(vals) - 1; i >= 0; i-- {
+		n := node{
+			Val: vals[i],
+		}
+
+		//空链表
+		if temp == nil {
+			ll.Next = &n
+			temp = &n
+			continue
+		}
+
+		temp.NextNode = &n
+
+		temp = temp.NextNode
+	}
+
+	return ll
 }
