@@ -1,3 +1,6 @@
+/*
+	稀疏数组demo
+*/
 package sparseArray
 
 import "fmt"
