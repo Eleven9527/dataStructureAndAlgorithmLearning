@@ -1,7 +1,9 @@
 package main
 
-import "algorithmLearning/singleSortLinkedList"
+import (
+	"algorithmLearning/doubleSortLinkedList"
+)
 
 func main() {
-	singleSortLinkedList.InterviewQuestions()
+	doubleSortLinkedList.DoubleSortLinkedListTest()
 }
