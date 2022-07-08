@@ -1,4 +1,4 @@
-package singleSortLinkedList
+package singleSortedLinkedList
 
 /*
 	单向有序链表demo

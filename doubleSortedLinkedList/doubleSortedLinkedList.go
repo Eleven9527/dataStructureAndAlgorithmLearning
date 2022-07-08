@@ -1,4 +1,4 @@
-package doubleSortLinkedList
+package doubleSortedLinkedList
 
 import "fmt"
 

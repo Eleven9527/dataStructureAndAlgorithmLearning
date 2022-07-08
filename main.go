@@ -1,9 +1,9 @@
 package main
 
 import (
-	"algorithmLearning/doubleSortLinkedList"
+	"algorithmLearning/singleSortedLinkedList"
 )
 
 func main() {
-	doubleSortLinkedList.DoubleSortLinkedListTest()
+	singleSortedLinkedList.JosephuLoop([]int{1, 3, 5, 2, 4, 6})
 }
